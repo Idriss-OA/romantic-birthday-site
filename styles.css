@@ -340,9 +340,63 @@ body::before {
   white-space: pre-line;
 }
 
-.letter-open-btn {
-  margin-top: 24px;
-  width: min(280px, 100%);
+.gallery-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-intro p {
+  margin: 0;
+  max-width: 760px;
+  color: #664054;
+}
+
+.gallery-grid.hidden {
+  display: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.gallery-card {
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 26px 70px rgba(209, 95, 132, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+}
+
+.gallery-card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 340px;
+}
+
+.gallery-card .photo-label {
+  padding: 20px 18px 22px;
+}
+
+.gallery-card .photo-label h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.15rem;
+  color: #6f3454;
+}
+
+.gallery-card .photo-label p {
+  margin: 0;
+  color: #7a4a64;
+  line-height: 1.7;
 }
 
 .photo-album-overlay {

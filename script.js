@@ -32,7 +32,7 @@ const letterLines = [
   "\n\nHappy Birthday, my princess. May this year bring you the magic you bring to me. ❤️"
 ];
 
-const relationshipStart = new Date('2023-01-01T08:30:00');
+const relationshipStart = new Date('2025-09-14T00:00:00');
 
 // Using your uploaded local images for the album.
 const photoUrls = [
@@ -43,10 +43,10 @@ const photoUrls = [
 ];
 
 const photoCaptions = [
-  'Our first unforgettable adventure.',
-  'When your smile lit up the whole world.',
-  'Moments when we danced under the stars.',
-  'A quiet moment that became everything.'
+  'Every memory with you is a chapter of our forever.',
+  'Your smile makes every day feel like a dream.',
+  'Together we turn ordinary moments into magic.',
+  'You are my favorite story, my heart, my home.'
 ];
 
 const memoryMessages = [
@@ -120,9 +120,12 @@ function buildPhotoSets() {
   if (!galleryGrid || !carouselWindow || !photoScroller) return;
 
   galleryGrid.innerHTML = photoUrls.map((url, index) => `
-    <div class="gallery-item lightbox-trigger" data-src="${url}">
+    <div class="gallery-card lightbox-trigger" data-src="${url}">
       <img src="${url}" alt="Memory ${index + 1}" />
-      <div class="gallery-caption">${photoCaptions[index] || ''}</div>
+      <div class="photo-label">
+        <h3>Memory ${index + 1}</h3>
+        <p>${photoCaptions[index] || ''}</p>
+      </div>
     </div>
   `).join('');
 
@@ -147,6 +150,8 @@ function buildPhotoSets() {
 }
 
 function openAlbum() {
+  const gallerySection = document.getElementById('galleryGrid');
+  if (gallerySection) gallerySection.classList.remove('hidden');
   photoAlbumOverlay.classList.add('open');
 }
 
