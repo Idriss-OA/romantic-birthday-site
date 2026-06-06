@@ -141,6 +141,9 @@ function revealNextCard(card) {
 function buildMemories() {
   if (!galleryStack || !videoStack) return;
 
+  // =========================
+  // 📸 PHOTO STACK (UNCHANGED)
+  // =========================
   galleryStack.innerHTML = memoryPhotos.map((item, index) => {
     const { top, left, rotate } = createCardPosition(index);
     return `
@@ -154,10 +157,16 @@ function buildMemories() {
     `;
   }).join('');
 
-  videoStack.innerHTML = videoMemories.map((item, index) => {
-    const { top, left, rotate } = createCardPosition(index);
+  galleryStack.querySelectorAll('.stack-card').forEach((card) => {
+    card.addEventListener('click', () => revealNextCard(card));
+  });
+
+  // =========================
+  // 🎥 VIDEO (INSTAGRAM STYLE)
+  // =========================
+  videoStack.innerHTML = videoMemories.map((item) => {
     return `
-      <div class="stack-card" data-index="${index}" style="top:${top}%; left:${left}%; transform: rotate(${rotate}deg); z-index:${1000 - index};">
+      <div class="video-item">
         <video src="${item.src}" playsinline muted controls preload="metadata"></video>
         <div class="stack-label">
           <h3>${item.title}</h3>
@@ -166,18 +175,6 @@ function buildMemories() {
       </div>
     `;
   }).join('');
-
-  galleryStack.querySelectorAll('.stack-card').forEach((card) => {
-    card.addEventListener('click', () => revealNextCard(card));
-  });
-
-  videoStack.querySelectorAll('.stack-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      const video = card.querySelector('video');
-      if (video) video.pause();
-      revealNextCard(card);
-    });
-  });
 }
 
 function openMemorySection() {

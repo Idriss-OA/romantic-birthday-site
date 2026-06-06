@@ -420,7 +420,7 @@ body::before {
   width: 100%;
   display: block;
   object-fit: cover;
-  height: 320px;
+  height: 150px;
 }
 
 .stack-label {
@@ -897,4 +897,46 @@ body::before {
     width: 160px;
     height: 160px;
   }
+}
+.video-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.video-scroll video {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  object-fit: cover;
+}
+.video-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255,255,255,0.88);
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+}
+
+.video-item video {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  object-fit: cover;
+  height: 220px; /* smaller videos */
+}
+
+.video-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 650px;
+  overflow-y: auto;
+  padding-right: 8px;
 }
