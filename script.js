@@ -18,12 +18,7 @@ const easterEggStar = document.getElementById('easterEggStar');
 const hero = document.getElementById('welcome');
 let writerIndex = 0;
 const letterLines = [
-  "My sweetest love,",
-  "\n\nOn this special day my heart is overflowing with gratitude for you.",
-  "Every moment we share becomes a cherished story written in golden light.",
-  "Your smile turns ordinary days into unforgettable dreams.",
-  "Thank you for making my life softer, warmer, and infinitely more beautiful.",
-  "\n\nHappy Birthday, my princess. May this year bring you the magic you bring to me. ❤️"
+  "Happy birthday l ahla w azyan  nousti f denya 🥳🥳🥳❤️❤️❤️ hditlik cadouet 9bl ama famech cadeau y5lik ttdhkr les souvenires eli 3chnehom lkol 7aja t93adlik mba3d tchoufha ttdhkrha fi kol wa9t ....Khw 5mmt na3ml site mzyen hedha lina, so we can always look back on the happiest moments we've shared together—every smile, every laugh, every romantic date, and every precious memory we've created. Anyway, enjoy ,  hope you love it ❤️❤️"
 ];
 
 const relationshipStart = new Date('2025-09-14T00:00:00');
@@ -46,19 +41,19 @@ const memoryPhotos = [
 ];
 
 const videoMemories = [
-  { src: 'assets/videos/video1.mp4', title: 'First dance', quote: 'The way we moved felt like a scene from our own love story.' },
-  { src: 'assets/videos/video2.mp4', title: 'Sweet laugh', quote: 'Your laughter becomes an echo I hope never fades.' },
-  { src: 'assets/videos/video3.mp4', title: 'Golden hour', quote: 'The light was perfect, but you made it unforgettable.' },
-  { src: 'assets/videos/video4.mp4', title: 'Beach stroll', quote: 'Walking with you is my favorite kind of adventure.' },
-  { src: 'assets/videos/video5.mp4', title: 'Cozy moment', quote: 'Our quiet moments are the ones I cherish most.' },
-  { src: 'assets/videos/video6.mp4', title: 'Sunrise joy', quote: 'Every new morning feels brighter because of you.' },
-  { src: 'assets/videos/video7.mp4', title: 'Happy together', quote: 'Your smile moves me more than words ever could.' },
-  { src: 'assets/videos/video8.mp4', title: 'Capturing us', quote: 'Every frame is a reminder that you are my favorite view.' },
-  { src: 'assets/videos/video9.mp4', title: 'Laughing hearts', quote: 'Our shared laughter is the sweetest soundtrack of us.' },
-  { src: 'assets/videos/video10.mp4', title: 'Quiet kiss', quote: 'The softest moments with you feel like home.' },
-  { src: 'assets/videos/video11.mp4', title: 'Radiant joy', quote: 'You bring light and warmth into every second.' },
-  { src: 'assets/videos/video12.mp4', title: 'Dream chase', quote: 'I love chasing life’s best moments right by your side.' },
-  { src: 'assets/videos/video13.mp4', title: 'My heartbeat', quote: 'Every scene with you makes my heart feel complete.' }
+  { src: 'assets/videos/video1.mp4', title:'' },
+  { src: 'assets/videos/video2.mp4', title:'' },
+  { src: 'assets/videos/video3.mp4', title:'' },
+  { src: 'assets/videos/video4.mp4', title:'' },
+  { src: 'assets/videos/video5.mp4', title:'' },
+  { src: 'assets/videos/video6.mp4', title:'' },
+  { src: 'assets/videos/video7.mp4', title:'' },
+  { src: 'assets/videos/video8.mp4', title:'' },
+  { src: 'assets/videos/video9.mp4', title:'' },
+  { src: 'assets/videos/video10.mp4', title:'' },
+  { src: 'assets/videos/video11.mp4', title:'' },
+  { src: 'assets/videos/video12.mp4', title:'' },
+  { src: 'assets/videos/video13.mp4', title:'' }
 ];
 
 function fadeOutPreloader() {
@@ -73,8 +68,9 @@ function revealName() {
 
 function toggleAudio() {
   if (romanticAudio.paused) {
-    romanticAudio.play();
-    audioBtn.textContent = 'Pause Music';
+    romanticAudio.play()
+      .then(() => { audioBtn.textContent = 'Pause Music'; })
+      .catch(err => console.log("Playback failed:", err));
   } else {
     romanticAudio.pause();
     audioBtn.textContent = 'Play Music';
@@ -170,7 +166,6 @@ function buildMemories() {
         <video src="${item.src}" playsinline muted controls preload="metadata"></video>
         <div class="stack-label">
           <h3>${item.title}</h3>
-          <p>${item.quote}</p>
         </div>
       </div>
     `;
@@ -240,6 +235,10 @@ function addCursorHearts() {
   });
 }
 
+romanticAudio.addEventListener('error', () => {
+  console.error("Audio file not found. Make sure 'assets/music/romantic.mp3' exists.");
+});
+
 function activateEasterEgg() {
   alert('Secret love note: Your laugh is my favorite sound, and your love is my greatest gift.');
 }
@@ -275,8 +274,18 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 openSurpriseBtn.addEventListener('click', () => {
-  document.getElementById('surprise').scrollIntoView({ behavior: 'smooth' });
-  openGift();
+  document.getElementById('letter').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+
+  if (romanticAudio.paused) {
+    romanticAudio.play()
+      .then(() => {
+        audioBtn.textContent = 'Pause Music';
+      })
+      .catch(() => console.log("Playback interaction required"));
+  }
 });
 
 giftBox.addEventListener('click', openGift);

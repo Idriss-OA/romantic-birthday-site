@@ -16,6 +16,8 @@ const mimeTypes = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.mp3': 'audio/mpeg',
+  '.mp4': 'video/mp4',
+  '.weba': 'audio/webm',
   '.woff2': 'font/woff2',
 };
 
@@ -38,10 +40,31 @@ http.createServer((req, res) => {
       return;
     }
 
+    const range = req.headers.range;
     const ext = path.extname(filePath).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
-    res.writeHead(200, {'Content-Type': contentType});
-    fs.createReadStream(filePath).pipe(res);
+
+    if (range) {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
+      const chunksize = (end - start) + 1;
+      const file = fs.createReadStream(filePath, {start, end});
+      const head = {
+        'Content-Range': `bytes ${start}-${end}/${stats.size}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunksize,
+        'Content-Type': contentType,
+      };
+      res.writeHead(206, head);
+      file.pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Length': stats.size,
+        'Content-Type': contentType,
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
   });
 }).listen(port, () => {
   console.log(`Romantic birthday site is live at http://localhost:${port}`);
