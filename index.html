@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, My Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="preloader" class="preloader">
+    <div class="loader-heart"></div>
+    <p>Drawing my heart for you...</p>
+  </div>
+
+  <div class="page-shell">
+    <div class="romantic-particles"></div>
+    <div class="rose-petals"></div>
+
+    <header class="hero section" id="welcome">
+      <div class="hero-overlay"></div>
+      <div class="hero-content glass-card">
+        <div class="floating-star" id="easterEggStar" title="Tap for a secret"></div>
+        <p class="hero-label">Happy Birthday, My Love ❤️</p>
+        <h1>Every moment with you feels like a dream.</h1>
+        <div class="reveal-name">For <span id="loverName">My Princess</span></div>
+        <p class="hero-copy">A magical surprise awaits with each scroll, each heartbeat, and every sparkle.</p>
+        <div class="hero-actions">
+          <button id="openSurpriseBtn" class="primary-btn">Open My Surprise</button>
+          <button id="audioBtn" class="secondary-btn">Play Music</button>
+        </div>
+        <div class="small-text">Tip: Tap the floating star to discover a hidden love note.</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section glass-section" id="timeline">
+        <div class="section-title">
+          <span>01</span>
+          <h2>Our Love Story Timeline</h2>
+        </div>
+        <div class="timeline-grid">
+          <div class="timeline-card">
+            <div class="timeline-date">The Beginning</div>
+            <p>When our paths crossed and everything began to glow with a new warmth.</p>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-date">First Memory</div>
+            <p>The first moment we laughed together and realized this was something unforgettable.</p>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-date">Adventures</div>
+            <p>Road trips, quiet nights, and the little surprises that made us fall deeper.</p>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-date">Today</div>
+            <p>Celebrating your birthday and the wonder of loving you more every day.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section glass-section" id="gallery">
+        <div class="section-title">
+          <span>02</span>
+          <h2>Photo Gallery</h2>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Photos will be loaded here from your URLs in script.js -->
+        </div>
+      </section>
+
+      <section class="section glass-section" id="letter">
+        <div class="section-title">
+          <span>03</span>
+          <h2>Birthday Letter</h2>
+        </div>
+        <div class="letter-card" id="letterCard">
+          <div class="letter-header">A letter written from my heart</div>
+          <p class="typewriter-text" id="typewriterText"></p>
+          <button id="openPhotoAlbumBtn" class="secondary-btn letter-open-btn">Open our photo album</button>
+        </div>
+      </section>
+
+      <section class="section glass-section" id="carousel">
+        <div class="section-title">
+          <span>04</span>
+          <h2>Memory Carousel</h2>
+        </div>
+        <div class="carousel-shell">
+          <button class="carousel-control" id="prevSlide">‹</button>
+          <div class="carousel-window" id="carouselWindow"></div>
+          <button class="carousel-control" id="nextSlide">›</button>
+        </div>
+      </section>
+
+      <div class="photo-album-overlay" id="photoAlbumOverlay">
+        <button class="album-close" id="albumClose">×</button>
+        <div class="album-content glass-card">
+          <h3>Our shared photo album</h3>
+          <p>Scroll through every photo that tells our story.</p>
+          <div class="photo-scroller" id="photoScroller"></div>
+        </div>
+      </div>
+
+      <section class="section glass-section" id="counter">
+        <div class="section-title">
+          <span>05</span>
+          <h2>Love Counter</h2>
+        </div>
+        <div class="counter-card">
+          <p>We have been together for</p>
+          <div class="counter-values" id="loveCounter">0 days, 0 hours, 0 minutes</div>
+          <p class="counter-heart">❤️</p>
+        </div>
+      </section>
+
+      <section class="section glass-section" id="surprise">
+        <div class="section-title">
+          <span>06</span>
+          <h2>Surprise Gift</h2>
+        </div>
+        <div class="gift-card">
+          <div class="gift-box" id="giftBox">
+            <div class="gift-top"></div>
+            <div class="gift-body"></div>
+            <div class="gift-ribbon"></div>
+          </div>
+          <p>Tap the gift to open your surprise.</p>
+        </div>
+        <div class="gift-message" id="giftMessage">
+          <p>Happy Birthday, my princess. You are the most beautiful part of my story, and today I celebrate you with all my love.</p>
+        </div>
+      </section>
+
+      <section class="section glass-section" id="finale">
+        <div class="section-title">
+          <span>07</span>
+          <h2>Final Romantic Scene</h2>
+        </div>
+        <div class="finale-shell">
+          <div class="final-heart"></div>
+          <div class="final-message">
+            <h3>Thank you for being the most beautiful part of my life.</h3>
+            <p>Happy Birthday, my princess ❤️</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">×</button>
+      <img id="lightboxImage" alt="Gallery preview" />
+    </div>
+
+    <audio id="romanticAudio" loop>
+      <source src="assets/music/romantic.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

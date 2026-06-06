@@ -1,0 +1,11 @@
+{
+  "name": "romantic-birthday-site",
+  "version": "1.0.0",
+  "description": "A romantic birthday website with animations and interactive effects.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
