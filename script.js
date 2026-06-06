@@ -9,19 +9,13 @@ const romanticAudio = document.getElementById('romanticAudio');
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
-const galleryGrid = document.getElementById('galleryGrid');
-const carouselWindow = document.getElementById('carouselWindow');
-const photoAlbumOverlay = document.getElementById('photoAlbumOverlay');
-const photoScroller = document.getElementById('photoScroller');
-const openPhotoAlbumBtn = document.getElementById('openPhotoAlbumBtn');
-const albumClose = document.getElementById('albumClose');
-const prevSlide = document.getElementById('prevSlide');
-const nextSlide = document.getElementById('nextSlide');
-let slides = [];
+const galleryStack = document.getElementById('galleryStack');
+const videoStack = document.getElementById('videoStack');
+const openMemoryButton = document.getElementById('openMemoryButton');
+const openVideoButton = document.getElementById('openVideoButton');
 const loveCounter = document.getElementById('loveCounter');
 const easterEggStar = document.getElementById('easterEggStar');
 const hero = document.getElementById('welcome');
-let currentSlide = 0;
 let writerIndex = 0;
 const letterLines = [
   "My sweetest love,",
@@ -34,26 +28,37 @@ const letterLines = [
 
 const relationshipStart = new Date('2025-09-14T00:00:00');
 
-// Using your uploaded local images for the album.
-const photoUrls = [
-  'assets/photos/photo1.jpg',
-  'assets/photos/photo2.jpg',
-  'assets/photos/photo3.jpg',
-  'assets/photos/photo4.jpg'
+const memoryPhotos = [
+  { src: 'assets/photos/photo1.jpg', title: 'Sunset promise', quote: 'The sky glowed just like my heart the moment I saw you.' },
+  { src: 'assets/photos/photo2.jpg', title: 'Early laughter', quote: 'Our first laugh together felt like the start of forever.' },
+  { src: 'assets/photos/photo3.jpg', title: 'Hand in hand', quote: 'Every step we take together becomes my favorite path.' },
+  { src: 'assets/photos/photo4.jpg', title: 'Soft whispers', quote: 'Your whispers are the melody that makes my spirit light.' },
+  { src: 'assets/photos/photo5.jpg', title: 'Midnight magic', quote: 'Even the quietest nights feel golden with you by my side.' },
+  { src: 'assets/photos/photo6.jpg', title: 'Sweet surprise', quote: 'Your surprise smiles are the sweetest chapters in our story.' },
+  { src: 'assets/photos/photo7.jpg', title: 'Warm embrace', quote: 'One hug from you is enough to color my whole day.' },
+  { src: 'assets/photos/photo8.jpg', title: 'Carefree joy', quote: 'The little moments with you become my strongest memories.' },
+  { src: 'assets/photos/photo9.jpg', title: 'Starry night', quote: 'Under the stars, I always feel closest to your heart.' },
+  { src: 'assets/photos/photo10.jpg', title: 'Golden hour', quote: 'The light around us is brightest when you are near.' },
+  { src: 'assets/photos/photo11.jpg', title: 'Dreamy together', quote: 'Every shared dream feels like a promise already kept.' },
+  { src: 'assets/photos/photo12.jpg', title: 'Playful pause', quote: 'Our laughter is the spark I want to keep forever.' },
+  { src: 'assets/photos/photo13.jpg', title: 'Gentle moments', quote: 'Your gentle love is the safest place I know.' },
+  { src: 'assets/photos/photo14.jpg', title: 'Forever us', quote: 'The best part of every day is the part that includes you.' }
 ];
 
-const photoCaptions = [
-  'Every memory with you is a chapter of our forever.',
-  'Your smile makes every day feel like a dream.',
-  'Together we turn ordinary moments into magic.',
-  'You are my favorite story, my heart, my home.'
-];
-
-const memoryMessages = [
-  'Each smile with you is a new favorite memory.',
-  'Our laughter still echoes in every corner of my heart.',
-  'Life is softer when I am holding your hand.',
-  'The warmest moments are the ones with you.'
+const videoMemories = [
+  { src: 'assets/videos/video1.mp4', title: 'First dance', quote: 'The way we moved felt like a scene from our own love story.' },
+  { src: 'assets/videos/video2.mp4', title: 'Sweet laugh', quote: 'Your laughter becomes an echo I hope never fades.' },
+  { src: 'assets/videos/video3.mp4', title: 'Golden hour', quote: 'The light was perfect, but you made it unforgettable.' },
+  { src: 'assets/videos/video4.mp4', title: 'Beach stroll', quote: 'Walking with you is my favorite kind of adventure.' },
+  { src: 'assets/videos/video5.mp4', title: 'Cozy moment', quote: 'Our quiet moments are the ones I cherish most.' },
+  { src: 'assets/videos/video6.mp4', title: 'Sunrise joy', quote: 'Every new morning feels brighter because of you.' },
+  { src: 'assets/videos/video7.mp4', title: 'Happy together', quote: 'Your smile moves me more than words ever could.' },
+  { src: 'assets/videos/video8.mp4', title: 'Capturing us', quote: 'Every frame is a reminder that you are my favorite view.' },
+  { src: 'assets/videos/video9.mp4', title: 'Laughing hearts', quote: 'Our shared laughter is the sweetest soundtrack of us.' },
+  { src: 'assets/videos/video10.mp4', title: 'Quiet kiss', quote: 'The softest moments with you feel like home.' },
+  { src: 'assets/videos/video11.mp4', title: 'Radiant joy', quote: 'You bring light and warmth into every second.' },
+  { src: 'assets/videos/video12.mp4', title: 'Dream chase', quote: 'I love chasing life’s best moments right by your side.' },
+  { src: 'assets/videos/video13.mp4', title: 'My heartbeat', quote: 'Every scene with you makes my heart feel complete.' }
 ];
 
 function fadeOutPreloader() {
@@ -67,10 +72,6 @@ function revealName() {
 }
 
 function toggleAudio() {
-  if (!romanticAudio.src) {
-    alert('Add a romantic tune to assets/music/romantic.mp3 for the audio player.');
-    return;
-  }
   if (romanticAudio.paused) {
     romanticAudio.play();
     audioBtn.textContent = 'Pause Music';
@@ -108,61 +109,89 @@ function calculateLoveTime() {
 }
 
 function showLightbox(src) {
+  if (!lightbox || !lightboxImage) return;
   lightboxImage.src = src;
   lightbox.classList.add('open');
 }
 
 function hideLightbox() {
+  if (!lightbox) return;
   lightbox.classList.remove('open');
 }
 
-function buildPhotoSets() {
-  if (!galleryGrid || !carouselWindow || !photoScroller) return;
+function createCardPosition(index) {
+  const top = 8 + (index * 5) % 45;
+  const left = 6 + (index * 9) % 58;
+  const rotate = -16 + (index * 7) % 32;
+  return { top, left, rotate };
+}
 
-  galleryGrid.innerHTML = photoUrls.map((url, index) => `
-    <div class="gallery-card lightbox-trigger" data-src="${url}">
-      <img src="${url}" alt="Memory ${index + 1}" />
-      <div class="photo-label">
-        <h3>Memory ${index + 1}</h3>
-        <p>${photoCaptions[index] || ''}</p>
+function revealNextCard(card) {
+  card.classList.add('gone');
+  const parent = card.parentElement;
+  const remaining = parent.querySelectorAll('.stack-card:not(.gone)');
+  if (remaining.length === 0) {
+    const endNote = document.createElement('p');
+    endNote.className = 'stack-end-message';
+    endNote.textContent = 'All of our memories have been revealed. Scroll up to relive them again anytime.';
+    parent.appendChild(endNote);
+  }
+}
+
+function buildMemories() {
+  if (!galleryStack || !videoStack) return;
+
+  galleryStack.innerHTML = memoryPhotos.map((item, index) => {
+    const { top, left, rotate } = createCardPosition(index);
+    return `
+      <div class="stack-card" data-index="${index}" style="top:${top}%; left:${left}%; transform: rotate(${rotate}deg); z-index:${1000 - index};">
+        <img src="${item.src}" alt="${item.title}" />
+        <div class="stack-label">
+          <h3>${item.title}</h3>
+          <p>${item.quote}</p>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
-  carouselWindow.innerHTML = photoUrls.map((url, index) => `
-    <div class="carousel-slide${index === 0 ? ' active' : ''}" data-index="${index}">
-      <img src="${url}" alt="Sweet Moment ${index + 1}" />
-      <p>${memoryMessages[index] || photoCaptions[index] || ''}</p>
-    </div>
-  `).join('');
+  videoStack.innerHTML = videoMemories.map((item, index) => {
+    const { top, left, rotate } = createCardPosition(index);
+    return `
+      <div class="stack-card" data-index="${index}" style="top:${top}%; left:${left}%; transform: rotate(${rotate}deg); z-index:${1000 - index};">
+        <video src="${item.src}" playsinline muted controls preload="metadata"></video>
+        <div class="stack-label">
+          <h3>${item.title}</h3>
+          <p>${item.quote}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
 
-  photoScroller.innerHTML = photoUrls.map((url, index) => `
-    <div class="photo-frame">
-      <img src="${url}" alt="Album ${index + 1}" />
-      <p>${photoCaptions[index] || ''}</p>
-    </div>
-  `).join('');
+  galleryStack.querySelectorAll('.stack-card').forEach((card) => {
+    card.addEventListener('click', () => revealNextCard(card));
+  });
 
-  slides = document.querySelectorAll('.carousel-slide');
-  document.querySelectorAll('.lightbox-trigger').forEach((item) => {
-    item.addEventListener('click', () => showLightbox(item.dataset.src));
+  videoStack.querySelectorAll('.stack-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const video = card.querySelector('video');
+      if (video) video.pause();
+      revealNextCard(card);
+    });
   });
 }
 
-function openAlbum() {
-  const gallerySection = document.getElementById('galleryGrid');
-  if (gallerySection) gallerySection.classList.remove('hidden');
-  photoAlbumOverlay.classList.add('open');
+function openMemorySection() {
+  if (galleryStack) {
+    galleryStack.classList.remove('hidden');
+    galleryStack.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
-function closeAlbum() {
-  photoAlbumOverlay.classList.remove('open');
-}
-
-function changeSlide(direction) {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + direction + slides.length) % slides.length;
-  slides[currentSlide].classList.add('active');
+function openVideoSection() {
+  if (videoStack) {
+    videoStack.classList.remove('hidden');
+    videoStack.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function createHeart(x, y) {
@@ -227,7 +256,25 @@ window.addEventListener('DOMContentLoaded', () => {
   spawnPetals();
   revealOnScroll();
   addCursorHearts();
-  buildPhotoSets();
+  buildMemories();
+
+  if (openMemoryButton) {
+    openMemoryButton.addEventListener('click', openMemorySection);
+  }
+
+  if (openVideoButton) {
+    openVideoButton.addEventListener('click', openVideoSection);
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', hideLightbox);
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) hideLightbox();
+    });
+  }
 });
 
 openSurpriseBtn.addEventListener('click', () => {
@@ -238,22 +285,6 @@ openSurpriseBtn.addEventListener('click', () => {
 giftBox.addEventListener('click', openGift);
 
 audioBtn.addEventListener('click', toggleAudio);
-
-lightboxClose.addEventListener('click', hideLightbox);
-lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox) hideLightbox();
-});
-
-if (openPhotoAlbumBtn) {
-  openPhotoAlbumBtn.addEventListener('click', openAlbum);
-}
-
-if (albumClose) {
-  albumClose.addEventListener('click', closeAlbum);
-}
-
-prevSlide.addEventListener('click', () => changeSlide(-1));
-nextSlide.addEventListener('click', () => changeSlide(1));
 
 easterEggStar.addEventListener('click', activateEasterEgg);
 

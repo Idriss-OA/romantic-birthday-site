@@ -67,12 +67,10 @@
           <h2>Our Memories</h2>
         </div>
         <div class="gallery-intro">
-          <p>Tap the button below to reveal the sweetest memories we have shared. Each photo has a love quote just for us.</p>
-          <button id="openPhotoAlbumBtn" class="primary-btn">Open Our Memories</button>
+          <p>Tap the shining heart to reveal our memories. Each photo is a special love moment, and when you click it, the next one appears.</p>
+          <button id="openMemoryButton" class="heart-btn">💖</button>
         </div>
-        <div class="gallery-grid hidden" id="galleryGrid">
-          <!-- Photos will be loaded here from your URLs in script.js -->
-        </div>
+        <div class="gallery-stack hidden" id="galleryStack"></div>
       </section>
 
       <section class="section glass-section" id="letter">
@@ -86,26 +84,17 @@
         </div>
       </section>
 
-      <section class="section glass-section" id="carousel">
+      <section class="section glass-section" id="videos">
         <div class="section-title">
           <span>04</span>
-          <h2>Memory Carousel</h2>
+          <h2>Video Moments</h2>
         </div>
-        <div class="carousel-shell">
-          <button class="carousel-control" id="prevSlide">‹</button>
-          <div class="carousel-window" id="carouselWindow"></div>
-          <button class="carousel-control" id="nextSlide">›</button>
+        <div class="video-intro">
+          <p>These clips carry the feeling of our sweetest days together. Tap the heart to reveal a new video memory, then click it to watch the next one.</p>
+          <button id="openVideoButton" class="heart-btn">💘</button>
         </div>
+        <div class="video-stack hidden" id="videoStack"></div>
       </section>
-
-      <div class="photo-album-overlay" id="photoAlbumOverlay">
-        <button class="album-close" id="albumClose">×</button>
-        <div class="album-content glass-card">
-          <h3>Our shared photo album</h3>
-          <p>Scroll through every photo that tells our story.</p>
-          <div class="photo-scroller" id="photoScroller"></div>
-        </div>
-      </div>
 
       <section class="section glass-section" id="counter">
         <div class="section-title">
@@ -158,7 +147,7 @@
     </div>
 
     <audio id="romanticAudio" loop>
-      <source src="assets/music/romantic.mp3" type="audio/mpeg" />
+      <source src="assets/music/videoplayback.weba" type="audio/webp" />
     </audio>
   </div>
 

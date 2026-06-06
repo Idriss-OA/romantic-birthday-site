@@ -364,39 +364,112 @@ body::before {
   gap: 22px;
 }
 
-.gallery-card {
+.heart-btn {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, #ff95bb, #d15279);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 20px 45px rgba(209, 95, 132, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.heart-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.gallery-stack,
+.video-stack {
+  position: relative;
+  min-height: 560px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.stack-card {
+  position: absolute;
+  width: min(320px, 90%);
+  max-width: 380px;
   border-radius: 28px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 26px 70px rgba(209, 95, 132, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), #fff0f6);
+  box-shadow: 0 30px 80px rgba(209, 95, 132, 0.22);
+  cursor: pointer;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.gallery-card:hover {
-  transform: translateY(-6px);
+.stack-card:hover {
+  transform: scale(1.02) translateY(-6px);
 }
 
-.gallery-card img {
+.stack-card.gone {
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  pointer-events: none;
+}
+
+.stack-card img,
+.stack-card video {
   width: 100%;
   display: block;
   object-fit: cover;
-  height: 340px;
+  height: 320px;
 }
 
-.gallery-card .photo-label {
-  padding: 20px 18px 22px;
+.stack-label {
+  padding: 18px 16px 20px;
 }
 
-.gallery-card .photo-label h3 {
-  margin: 0 0 0.7rem;
-  font-size: 1.15rem;
-  color: #6f3454;
+.stack-label h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.12rem;
+  color: #6d304f;
 }
 
-.gallery-card .photo-label p {
+.stack-label p {
   margin: 0;
-  color: #7a4a64;
-  line-height: 1.7;
+  color: #724656;
+  line-height: 1.75;
+}
+
+.video-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.video-intro p {
+  margin: 0;
+  max-width: 760px;
+  color: #664054;
+}
+
+.gallery-stack::after,
+.video-stack::after {
+  content: 'Click a memory to reveal the next one.';
+  position: absolute;
+  bottom: -32px;
+  left: 0;
+  right: 0;
+  color: #8a516f;
+  text-align: center;
+  font-size: 0.98rem;
+}
+
+.stack-end-message {
+  margin-top: 1.6rem;
+  color: #8f5571;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .photo-album-overlay {
