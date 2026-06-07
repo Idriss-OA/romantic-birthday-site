@@ -24,20 +24,20 @@ const letterLines = [
 const relationshipStart = new Date('2025-09-14T00:00:00');
 
 const memoryPhotos = [
-  { src: 'assets/photos/photo1.jpg', title: 'Sunset promise', quote: 'The sky glowed just like my heart the moment I saw you.' },
-  { src: 'assets/photos/photo2.jpg', title: 'Early laughter', quote: 'Our first laugh together felt like the start of forever.' },
-  { src: 'assets/photos/photo3.jpg', title: 'Hand in hand', quote: 'Every step we take together becomes my favorite path.' },
-  { src: 'assets/photos/photo4.jpg', title: 'Soft whispers', quote: 'Your whispers are the melody that makes my spirit light.' },
-  { src: 'assets/photos/photo5.jpg', title: 'Midnight magic', quote: 'Even the quietest nights feel golden with you by my side.' },
-  { src: 'assets/photos/photo6.jpg', title: 'Sweet surprise', quote: 'Your surprise smiles are the sweetest chapters in our story.' },
-  { src: 'assets/photos/photo7.jpg', title: 'Warm embrace', quote: 'One hug from you is enough to color my whole day.' },
-  { src: 'assets/photos/photo8.jpg', title: 'Carefree joy', quote: 'The little moments with you become my strongest memories.' },
-  { src: 'assets/photos/photo9.jpg', title: 'Starry night', quote: 'Under the stars, I always feel closest to your heart.' },
-  { src: 'assets/photos/photo10.jpg', title: 'Golden hour', quote: 'The light around us is brightest when you are near.' },
-  { src: 'assets/photos/photo11.jpg', title: 'Dreamy together', quote: 'Every shared dream feels like a promise already kept.' },
-  { src: 'assets/photos/photo12.jpg', title: 'Playful pause', quote: 'Our laughter is the spark I want to keep forever.' },
-  { src: 'assets/photos/photo13.jpg', title: 'Gentle moments', quote: 'Your gentle love is the safest place I know.' },
-  { src: 'assets/photos/photo14.jpg', title: 'Forever us', quote: 'The best part of every day is the part that includes you.' }
+  { src: 'assets/photos/photo1.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo2.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo3.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo4.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo5.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo6.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo7.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo8.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo9.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo10.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo11.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo12.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo13.jpg', title: '', quote: '' },
+  { src: 'assets/photos/photo14.jpg', title: '', quote: '' }
 ];
 
 const videoMemories = [
