@@ -384,13 +384,18 @@ body::before {
 .hidden {
   display: none !important;
 }
-
-.gallery-stack,
 .video-stack {
   position: relative;
   min-height: 560px;
   max-width: 100%;
   margin: 0 auto;
+}
+.gallery-stack {
+  position: relative;
+  min-height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .stack-card {

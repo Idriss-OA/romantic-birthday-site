@@ -141,17 +141,25 @@ function buildMemories() {
   // 📸 PHOTO STACK (UNCHANGED)
   // =========================
   galleryStack.innerHTML = memoryPhotos.map((item, index) => {
-    const { top, left, rotate } = createCardPosition(index);
-    return `
-      <div class="stack-card" data-index="${index}" style="top:${top}%; left:${left}%; transform: rotate(${rotate}deg); z-index:${1000 - index};">
-        <img src="${item.src}" alt="${item.title}" />
-        <div class="stack-label">
-          <h3>${item.title}</h3>
-          <p>${item.quote}</p>
-        </div>
+  const rotate = -10 + (index * 2);
+
+  return `
+    <div class="stack-card"
+         data-index="${index}"
+         style="
+           top:50%;
+           left:50%;
+           transform:translate(-50%, -50%) rotate(${rotate}deg);
+           z-index:${1000 - index};
+         ">
+      <img src="${item.src}" alt="${item.title}" />
+      <div class="stack-label">
+        <h3>${item.title}</h3>
+        <p>${item.quote}</p>
       </div>
-    `;
-  }).join('');
+    </div>
+  `;
+}).join('');
 
   galleryStack.querySelectorAll('.stack-card').forEach((card) => {
     card.addEventListener('click', () => revealNextCard(card));
